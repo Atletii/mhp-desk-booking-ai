@@ -1,12 +1,9 @@
 import datetime
-from enum import Enum
-
 import pandas as pd
 from fastapi import FastAPI
 from fastapi import status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-
 from model_predictor import predict_desk, predict_room
 
 
