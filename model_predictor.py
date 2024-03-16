@@ -2,7 +2,7 @@ import pickle
 import re
 
 import pandas as pd
-import sklearn
+
 
 def feature_eng_room(df):
     df_pop = pd.read_csv('room_day_pop.csv')
@@ -64,7 +64,6 @@ def predict_room(room, date, timeframe):
         model = pickle.load(open('room_3_5_pred.pk1', 'rb'))
 
     pred = model.predict_proba(df)[:, 1][0]
-    print(pred)
     return pred
 
 
@@ -80,7 +79,7 @@ def predict_desk(desk, date, half):
     if df.empty:
         raise ValueError("Desk ID not valid")
 
-    print(df)
+    # print(df)
 
     if half == 'first':
         model = pickle.load(open('desk_first_pred.pk1', 'rb'))
@@ -89,7 +88,6 @@ def predict_desk(desk, date, half):
         model = pickle.load(open('desk_second_pred.pk1', 'rb'))
 
     pred = model.predict_proba(df)[:, 1][0]
-    print(pred)
     return pred
 
 
@@ -128,8 +126,3 @@ def proximity_to_exit(desk):
         return int(match.group(4)) + int(match.group(5))
     else:
         return None
-
-
-# predict_desk('CLUJ_5_beta_5.3', '25/03/2024', 'second')
-#
-# predict_room('Joker Lap', '1/4/2024', 'elevenToOne')
