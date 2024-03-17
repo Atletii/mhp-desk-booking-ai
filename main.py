@@ -24,7 +24,7 @@ class RoomRequest(BaseModel):
 
 app = FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
-origins = ["http://localhost:3000"]
+origins = ["http://localhost:3000", "https://mhp-desk-booking.galitianu.com"]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"])
 app.add_exception_handler(Exception, custom_exception_handler)
 

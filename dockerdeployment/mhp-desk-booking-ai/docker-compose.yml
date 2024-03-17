@@ -5,5 +5,15 @@ services:
   tenderflow-ai:
     container_name: mhp-desk-booking-ai
     image: mhp-desk-booking-ai
-    ports:
-      - "8001:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mhp-ai.rule=Host(`mhp-desk-booking-ai.galitianu.com`)"
+      - "traefik.http.routers.mhp-ai.entrypoints=websecure"
+      - "traefik.http.routers.mhp-ai.tls.certresolver=myresolver"
+      - "traefik.http.services.mhp-ai.loadbalancer.server.port=8000"
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true
