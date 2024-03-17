@@ -23,6 +23,9 @@ class RoomRequest(BaseModel):
 
 
 app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
+origins = ["http://localhost:3000"]
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"])
 app.add_exception_handler(Exception, custom_exception_handler)
 
 
@@ -102,11 +105,10 @@ def predict_room_week_average(room, selected_date):
     return week_averages
 
 
-@app.get("/predict/desk")
+@app.post("/predict/desk")
 async def predict_desk_api(desk_request: DeskRequest):
     return predict_desk_week_average(desk_request.name, desk_request.date)
 
-
-@app.get("/predict/room")
+@app.post("/predict/room")
 async def predict_room_api(room_request: RoomRequest):
     return predict_room_week_average(room_request.name, room_request.date)
