@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+
+  tenderflow-ai:
+    container_name: mhp-desk-booking-ai
+    image: mhp-desk-booking-ai
+    ports:
+      - "8001:8000"
